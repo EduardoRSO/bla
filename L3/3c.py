@@ -38,22 +38,27 @@ def solution(n,colors):
     if p == 0:
         m = 0 #não há repetição, então a resposta é 0
     else:
-        while True:
-            #print(l,r,p,m)
+        #print(colors)
+        while r!=n-1 or l !=n-1:
+            #print(l, r, p, m, q)
             if 0 < p: #segmento inválido
                 if r < n-1:
                     r+=1
-                    q[colors[r]] -= 1
-                    if q[colors[r]] == 1:
-                        p -= 1
+                    #if q[colors[r]] >1:
+                    q[colors[r]]-=1
+                    if q[colors[r]] >= 1:
+                            p -= 1
+                    #print(l,r,colors[r], q[colors[r]],p)
                 else:
                     break
             if 0 == p: #segmento válido
-                m = min(m,r-l+1)
-                q[colors[l]]+=1
-                if q[colors[l]]>1:
-                    p+=1
-                l+=1
+                if l < n-1:
+                    m = min(m,r-l+1)
+                    q[colors[l]]+=1
+                    if q[colors[l]]>1:
+                        p+=1
+                    l+=1
+            #print(l, r, p, m, q)
     print(m)
 if __name__ == '__main__':
     n = int(input())
